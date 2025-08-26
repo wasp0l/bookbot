@@ -17,11 +17,13 @@ def count_characters(book_text):
             character_count[character] = 1
     return character_count
 
-def main():
-    book_text = get_book_text("books/frankenstein.txt")
-    word_count = count_words(book_text)
-    character_count = count_characters(book_text.lower())
-    print(f"{word_count} words found in the document")
-    print (f"{character_count}")
+def sort_on(items):
+    return items["num"]
 
-main()
+def sort_dictionaries(character_count):
+    dictionary_list = []
+    for character in character_count:
+        if character.isalpha():
+            dictionary_list.append({"char": character, "num": character_count[character]})
+    dictionary_list.sort(reverse=True, key=sort_on)
+    return dictionary_list
