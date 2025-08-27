@@ -1,29 +1,27 @@
+# python
 def get_book_text(path):
-    with open(path) as f:
-        book_text = f.read()
-    return book_text
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
 def count_words(book_text):
-    word_list = book_text.split()
-    i = len(word_list)
-    return i
+    return len(book_text.split())
 
 def count_characters(book_text):
-    character_count = {}
-    for character in book_text.lower():
-        if character in character_count:
-            character_count[character] += 1
+    counts = {}
+    for ch in book_text.lower():
+        if ch in counts:
+            counts[ch] += 1
         else:
-            character_count[character] = 1
-    return character_count
+            counts[ch] = 1
+    return counts
 
-def sort_on(items):
-    return items["num"]
+def sort_on(item):
+    return item["num"]
 
-def sort_dictionaries(character_count):
-    dictionary_list = []
-    for character in character_count:
-        if character.isalpha():
-            dictionary_list.append({"char": character, "num": character_count[character]})
-    dictionary_list.sort(reverse=True, key=sort_on)
-    return dictionary_list
+def sort_dictionaries(char_counts):
+    items = []
+    for ch, n in char_counts.items():
+        if ch.isalpha():
+            items.append({"char": ch, "num": n})
+    items.sort(key=sort_on, reverse=True)
+    return items
